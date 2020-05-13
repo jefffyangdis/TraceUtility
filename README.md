@@ -1,3 +1,5 @@
+在原工程基础上添加了Allocations内存采样统计功能
+
 # TraceUtility
 
 *Works with Instruments.app bundled in Xcode 9.4*
