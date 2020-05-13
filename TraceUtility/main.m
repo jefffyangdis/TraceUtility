@@ -73,22 +73,13 @@ int main(int argc, const char * argv[]) {
             for (XRRun *run in runs) {
                 TUPrint(@"Run #%@: %@,start:%@, end:%@\n", @(run.runNumber), run.displayName,@(run.startTime),@(run.endTime));
 
-//                PFTTrackSegment *segment = [[run allSegments] firstObject];
-//                TUPrint(@"segment:%@,%@",[segment valueForKey:@"startTimeInUnits"],[segment valueForKey:@"endTimeInUnits"]);
-//                [segment setValue:@(60) forKey:@"endTimeInUnits"];
-//                TUPrint(@"segment:%@,%@",[segment valueForKey:@"startTimeInUnits"],[segment valueForKey:@"endTimeInUnits"]);
-//                [run stopCurrentTrackSegmentNow];
-//                [run clearTrackSegments];
-//                PFTTrackSegment *seg = [PFTTrackSegment new];
-//                [segment setValue:@(0) forKey:@"startTimeInUnits"];
-//                [segment setValue:@(60) forKey:@"endTimeInUnits"];
-//                [segment setValue:@(1) forKey:@"segmentLocked"];
-//                [run addTrackSegment:seg];
                 instrument.currentRun = run;
                 XRTimeRange range;
-                range.start = 10000000000;
-                range.length = 40000000000;
-                [(XRObjectAllocRun *)run setSelectedTimeRange:range];
+                range.start = 0;
+                range.length = 10.0*1000000000;
+                if ( [run respondsToSelector:@selector(setSelectedTimeRange:)] ) {
+                    [(XRObjectAllocRun *)run setSelectedTimeRange:range];
+                }
 
                 // Common routine to obtain contexts for the instrument.
                 NSMutableArray<XRContext *> *contexts = [NSMutableArray array];
@@ -139,26 +130,40 @@ int main(int argc, const char * argv[]) {
                     XRManagedEventArrayController *arrayController = TUIvar(TUIvar(allocInstrument, _objectListController), _ac);
                     NSArrayController *summary = TUIvar(allocInstrument, _summaryController);
                     TUPrint(@"count:%@,%@",@([(NSArray*)arrayController.arrangedObjects count]),@([(NSArray*)summary.arrangedObjects count]));
-                    NSArray *sumobjects = summary.arrangedObjects;
-                    for ( id sum in sumobjects) {
+//                    NSArray *sumobjects = summary.arrangedObjects;
+//                    NSMutableDictionary<NSNumber *, NSNumber *> *sizeGroupedByTime = [NSMutableDictionary dictionary];
+//                    NSArray *arrobjects = arrayController.arrangedObjects;
+//                    for (XRObjectAllocEvent *event in arrobjects) {
+//                        NSNumber *time = @(event.timestamp / NSEC_PER_SEC);
+//                        NSNumber *size = @(sizeGroupedByTime[time].integerValue + event.size);
+//                        sizeGroupedByTime[time] = size;
+//                    }
+//                    NSArray<NSNumber *> *sortedTime = [sizeGroupedByTime.allKeys sortedArrayUsingComparator:^(NSNumber *time1, NSNumber *time2) {
+//                        return [sizeGroupedByTime[time2] compare:sizeGroupedByTime[time1]];
+//                    }];
+//                    NSByteCountFormatter *byteFormatter = [[NSByteCountFormatter alloc]init];
+//                    byteFormatter.countStyle = NSByteCountFormatterCountStyleBinary;
+//                    for (NSNumber *time in sortedTime) {
+//                        NSString *size = [byteFormatter stringForObjectValue:sizeGroupedByTime[time]];
+//                        TUPrint(@"%@ %@\n", time, size);
+//                    }
+                    XRTimeRange range;
+                    range.start = 0;
+                    for( double time = 0.02; time < run.endTime-run.startTime; time += 0.02) {
+                        range.length = time*1000000000;
+                        if ( [run respondsToSelector:@selector(setSelectedTimeRange:)] ) {
+                            [(XRObjectAllocRun *)run setSelectedTimeRange:range];
+                        }
+                        allocInstrument.currentRun = run;
+                        NSArrayController *summary = TUIvar(allocInstrument, _summaryController);
+                        id a = [(NSArray *)summary.arrangedObjects firstObject];
+                        TUPrint(@"%7.2f summary: %10.2fM",time,[[a valueForKey:@"livingBytes"] unsignedLongLongValue]/1024.0/1024.0);
+                        a = nil;
+                        XRManagedEventArrayController *arrayController = TUIvar(TUIvar(allocInstrument, _objectListController), _ac);
+                        id b = [arrayController.arrangedObjects firstObject];
+                        b = nil;
+                    }
 
-                    }
-                    NSMutableDictionary<NSNumber *, NSNumber *> *sizeGroupedByTime = [NSMutableDictionary dictionary];
-                    NSArray *arrobjects = arrayController.arrangedObjects;
-                    for (XRObjectAllocEvent *event in arrobjects) {
-                        NSNumber *time = @(event.timestamp / NSEC_PER_SEC);
-                        NSNumber *size = @(sizeGroupedByTime[time].integerValue + event.size);
-                        sizeGroupedByTime[time] = size;
-                    }
-                    NSArray<NSNumber *> *sortedTime = [sizeGroupedByTime.allKeys sortedArrayUsingComparator:^(NSNumber *time1, NSNumber *time2) {
-                        return [sizeGroupedByTime[time2] compare:sizeGroupedByTime[time1]];
-                    }];
-                    NSByteCountFormatter *byteFormatter = [[NSByteCountFormatter alloc]init];
-                    byteFormatter.countStyle = NSByteCountFormatterCountStyleBinary;
-                    for (NSNumber *time in sortedTime) {
-                        NSString *size = [byteFormatter stringForObjectValue:sizeGroupedByTime[time]];
-                        TUPrint(@"%@ %@\n", time, size);
-                    }
                 } else if ([instrumentID isEqualToString:@"com.apple.dt.coreanimation-fps"]) {
                     // Core Animation FPS: print out all FPS data samples.
                     // 2 contexts: Measurements, Statistics
