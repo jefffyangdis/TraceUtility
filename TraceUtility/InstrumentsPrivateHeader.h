@@ -35,6 +35,48 @@ typedef struct { XRTime start, length; } XRTimeRange;
 - (SInt64)runNumber;
 - (NSString *)displayName;
 - (XRTimeRange)timeRange;
+- (void)setEnd:(double)arg1;
+- (double)endTime;
+- (void)setStart:(double)arg1;
+- (double)startTime;
+- (void)addTrackSegment:(id)arg1;
+- (void)clearTrackSegments;
+- (void)_addTrackSegment:(id)arg1;
+- (id)allSegments;
+- (void)stopCurrentTrackSegmentNow;
+@end
+
+@interface XRObjectAllocRun : XRRun
+- (void)setSelectedTimeRange:(XRTimeRange)arg1;
+@end
+
+@interface PFTTrackSegment : NSObject <NSCoding>
+{
+    XRRun *_runNotRetained;
+    double _startTimeInUnits;
+    double _endTimeInUnits;
+    double _endTimeRange;
+    BOOL _segmentLocked;
+    BOOL _pauseEndedSegment;
+//    PFTTraceDocument *_traceDocument;
+}
+
++ (void)initialize;
+//- (void).cxx_destruct;
+- (BOOL)pauseEndedSegment;
+- (void)setPauseEndedSegment:(BOOL)arg1;
+- (void)lockAtEndTimeInUnits:(double)arg1;
+- (BOOL)segmentComplete;
+- (id)traceDocument;
+- (void)setTraceDocument:(id)arg1;
+- (id)parentRun;
+- (void)setParentRun:(id)arg1;
+- (id)initWithCoder:(id)arg1;
+- (void)encodeWithCoder:(id)arg1;
+- (void)clearGraphCache;
+- (void)setupWithStartTime:(double)arg1;
+- (id)initWithTraceDocument:(id)arg1;
+
 @end
 
 @interface PFTInstrumentType : NSObject

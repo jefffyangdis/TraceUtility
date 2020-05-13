@@ -71,8 +71,24 @@ int main(int argc, const char * argv[]) {
                 continue;
             }
             for (XRRun *run in runs) {
-                TUPrint(@"Run #%@: %@\n", @(run.runNumber), run.displayName);
+                TUPrint(@"Run #%@: %@,start:%@, end:%@\n", @(run.runNumber), run.displayName,@(run.startTime),@(run.endTime));
+
+//                PFTTrackSegment *segment = [[run allSegments] firstObject];
+//                TUPrint(@"segment:%@,%@",[segment valueForKey:@"startTimeInUnits"],[segment valueForKey:@"endTimeInUnits"]);
+//                [segment setValue:@(60) forKey:@"endTimeInUnits"];
+//                TUPrint(@"segment:%@,%@",[segment valueForKey:@"startTimeInUnits"],[segment valueForKey:@"endTimeInUnits"]);
+//                [run stopCurrentTrackSegmentNow];
+//                [run clearTrackSegments];
+//                PFTTrackSegment *seg = [PFTTrackSegment new];
+//                [segment setValue:@(0) forKey:@"startTimeInUnits"];
+//                [segment setValue:@(60) forKey:@"endTimeInUnits"];
+//                [segment setValue:@(1) forKey:@"segmentLocked"];
+//                [run addTrackSegment:seg];
                 instrument.currentRun = run;
+                XRTimeRange range;
+                range.start = 10000000000;
+                range.length = 40000000000;
+                [(XRObjectAllocRun *)run setSelectedTimeRange:range];
 
                 // Common routine to obtain contexts for the instrument.
                 NSMutableArray<XRContext *> *contexts = [NSMutableArray array];
@@ -85,7 +101,7 @@ int main(int argc, const char * argv[]) {
                     [detailController restoreViewState];
                     XRAnalysisCoreDetailNode *detailNode = TUIvar(detailController, _firstNode);
                     while (detailNode) {
-                        [contexts addObject:XRContextFromDetailNode(detailController, detailNode)];
+//                        [contexts addObject:XRContextFromDetailNode(detailController, detailNode)];
                         detailNode = detailNode.nextSibling;
                     }
                 }
@@ -121,8 +137,15 @@ int main(int argc, const char * argv[]) {
                     // 4 contexts: Statistics, Call Trees, Allocations List, Generations.
                     [allocInstrument._topLevelContexts[2] display];
                     XRManagedEventArrayController *arrayController = TUIvar(TUIvar(allocInstrument, _objectListController), _ac);
+                    NSArrayController *summary = TUIvar(allocInstrument, _summaryController);
+                    TUPrint(@"count:%@,%@",@([(NSArray*)arrayController.arrangedObjects count]),@([(NSArray*)summary.arrangedObjects count]));
+                    NSArray *sumobjects = summary.arrangedObjects;
+                    for ( id sum in sumobjects) {
+
+                    }
                     NSMutableDictionary<NSNumber *, NSNumber *> *sizeGroupedByTime = [NSMutableDictionary dictionary];
-                    for (XRObjectAllocEvent *event in arrayController.arrangedObjects) {
+                    NSArray *arrobjects = arrayController.arrangedObjects;
+                    for (XRObjectAllocEvent *event in arrobjects) {
                         NSNumber *time = @(event.timestamp / NSEC_PER_SEC);
                         NSNumber *size = @(sizeGroupedByTime[time].integerValue + event.size);
                         sizeGroupedByTime[time] = size;
@@ -253,3 +276,8 @@ int main(int argc, const char * argv[]) {
     }
     return 0;
 }
+
+//- (void)displayAllocationsSummary:(NSArrayController *)controller
+//{
+//    controller.arranged
+//}

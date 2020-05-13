@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8434A3EA246A8E0D00069F59 /* Xcode.app in Resources */ = {isa = PBXBuildFile; fileRef = 8434A3E9246A8E0D00069F59 /* Xcode.app */; };
+		8434A3ED246A963100069F59 /* InstrumentsPackaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8434A3EC246A962D00069F59 /* InstrumentsPackaging.framework */; };
+		8434A3EE246A963100069F59 /* InstrumentsPackaging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8434A3EC246A962D00069F59 /* InstrumentsPackaging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2BABC6920E520B80048C20A /* InstrumentsAnalysisCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BABC6820E520B80048C20A /* InstrumentsAnalysisCore.framework */; };
 		D2BABC6B20E520BF0048C20A /* InstrumentsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BABC6A20E520BF0048C20A /* InstrumentsKit.framework */; };
 		D2BABC6D20E521020048C20A /* DVTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BABC6C20E521020048C20A /* DVTFoundation.framework */; };
@@ -17,6 +20,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		8434A3EF246A963100069F59 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8434A3EE246A963100069F59 /* InstrumentsPackaging.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FECBF47D1B9D577200D653A7 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -29,6 +43,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8434A3E9246A8E0D00069F59 /* Xcode.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Xcode.app; path = ../../../../Applications/Xcode.app; sourceTree = "<group>"; };
+		8434A3EC246A962D00069F59 /* InstrumentsPackaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InstrumentsPackaging.framework; path = ../../../../Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/Frameworks/InstrumentsPackaging.framework; sourceTree = "<group>"; };
 		D2BABC6820E520B80048C20A /* InstrumentsAnalysisCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InstrumentsAnalysisCore.framework; path = /Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/Frameworks/InstrumentsAnalysisCore.framework; sourceTree = "<group>"; };
 		D2BABC6A20E520BF0048C20A /* InstrumentsKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InstrumentsKit.framework; path = /Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/Frameworks/InstrumentsKit.framework; sourceTree = "<group>"; };
 		D2BABC6C20E521020048C20A /* DVTFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DVTFoundation.framework; path = /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework; sourceTree = "<group>"; };
@@ -48,6 +64,7 @@
 				D2BABC6920E520B80048C20A /* InstrumentsAnalysisCore.framework in Frameworks */,
 				D2BABC6F20E5210C0048C20A /* DVTInstrumentsFoundation.framework in Frameworks */,
 				D2BABC7120E521170048C20A /* DVTInstrumentsUtilities.framework in Frameworks */,
+				8434A3ED246A963100069F59 /* InstrumentsPackaging.framework in Frameworks */,
 				FECBF4951B9D6CE500D653A7 /* InstrumentsPlugIn.framework in Frameworks */,
 				D2BABC6B20E520BF0048C20A /* InstrumentsKit.framework in Frameworks */,
 				D2BABC6D20E521020048C20A /* DVTFoundation.framework in Frameworks */,
@@ -60,6 +77,8 @@
 		FE0153E51B9E7E370062C910 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8434A3EC246A962D00069F59 /* InstrumentsPackaging.framework */,
+				8434A3E9246A8E0D00069F59 /* Xcode.app */,
 				D2BABC6C20E521020048C20A /* DVTFoundation.framework */,
 				D2BABC6E20E5210C0048C20A /* DVTInstrumentsFoundation.framework */,
 				D2BABC7020E521160048C20A /* DVTInstrumentsUtilities.framework */,
@@ -106,6 +125,8 @@
 				FECBF47B1B9D577200D653A7 /* Sources */,
 				FECBF47C1B9D577200D653A7 /* Frameworks */,
 				FECBF47D1B9D577200D653A7 /* CopyFiles */,
+				8434A3EB246A8E0D00069F59 /* Resources */,
+				8434A3EF246A963100069F59 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -135,6 +156,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = FECBF4761B9D577200D653A7;
@@ -146,6 +168,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8434A3EB246A8E0D00069F59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8434A3EA246A8E0D00069F59 /* Xcode.app in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FECBF47B1B9D577200D653A7 /* Sources */ = {
@@ -270,6 +303,8 @@
 		FECBF4871B9D577200D653A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -277,6 +312,8 @@
 		FECBF4881B9D577200D653A7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
