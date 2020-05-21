@@ -10,6 +10,8 @@
 		8434A3EA246A8E0D00069F59 /* Xcode.app in Resources */ = {isa = PBXBuildFile; fileRef = 8434A3E9246A8E0D00069F59 /* Xcode.app */; };
 		8434A3ED246A963100069F59 /* InstrumentsPackaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8434A3EC246A962D00069F59 /* InstrumentsPackaging.framework */; };
 		8434A3EE246A963100069F59 /* InstrumentsPackaging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8434A3EC246A962D00069F59 /* InstrumentsPackaging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		84F182302476B48C00DFEF05 /* CaCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F1822B2476B48600DFEF05 /* CaCommand.m */; };
+		84F182312476B48C00DFEF05 /* CaAllocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F1822D2476B48900DFEF05 /* CaAllocations.m */; };
 		D2BABC6920E520B80048C20A /* InstrumentsAnalysisCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BABC6820E520B80048C20A /* InstrumentsAnalysisCore.framework */; };
 		D2BABC6B20E520BF0048C20A /* InstrumentsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BABC6A20E520BF0048C20A /* InstrumentsKit.framework */; };
 		D2BABC6D20E521020048C20A /* DVTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BABC6C20E521020048C20A /* DVTFoundation.framework */; };
@@ -45,6 +47,11 @@
 /* Begin PBXFileReference section */
 		8434A3E9246A8E0D00069F59 /* Xcode.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Xcode.app; path = ../../../../Applications/Xcode.app; sourceTree = "<group>"; };
 		8434A3EC246A962D00069F59 /* InstrumentsPackaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InstrumentsPackaging.framework; path = ../../../../Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/Frameworks/InstrumentsPackaging.framework; sourceTree = "<group>"; };
+		84F1822B2476B48600DFEF05 /* CaCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaCommand.m; sourceTree = "<group>"; };
+		84F1822C2476B48900DFEF05 /* CaAllocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaAllocations.h; sourceTree = "<group>"; };
+		84F1822D2476B48900DFEF05 /* CaAllocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaAllocations.m; sourceTree = "<group>"; };
+		84F1822E2476B48C00DFEF05 /* CaCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaCommand.h; sourceTree = "<group>"; };
+		84F1822F2476B48C00DFEF05 /* CaDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaDefines.h; sourceTree = "<group>"; };
 		D2BABC6820E520B80048C20A /* InstrumentsAnalysisCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InstrumentsAnalysisCore.framework; path = /Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/Frameworks/InstrumentsAnalysisCore.framework; sourceTree = "<group>"; };
 		D2BABC6A20E520BF0048C20A /* InstrumentsKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InstrumentsKit.framework; path = /Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/Frameworks/InstrumentsKit.framework; sourceTree = "<group>"; };
 		D2BABC6C20E521020048C20A /* DVTFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DVTFoundation.framework; path = /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework; sourceTree = "<group>"; };
@@ -109,6 +116,11 @@
 		FECBF4811B9D577200D653A7 /* TraceUtility */ = {
 			isa = PBXGroup;
 			children = (
+				84F1822C2476B48900DFEF05 /* CaAllocations.h */,
+				84F1822D2476B48900DFEF05 /* CaAllocations.m */,
+				84F1822E2476B48C00DFEF05 /* CaCommand.h */,
+				84F1822B2476B48600DFEF05 /* CaCommand.m */,
+				84F1822F2476B48C00DFEF05 /* CaDefines.h */,
 				FE0153E61B9E7E630062C910 /* InstrumentsPrivateHeader.h */,
 				FECBF4821B9D577200D653A7 /* main.m */,
 			);
@@ -186,6 +198,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FECBF4831B9D577200D653A7 /* main.m in Sources */,
+				84F182302476B48C00DFEF05 /* CaCommand.m in Sources */,
+				84F182312476B48C00DFEF05 /* CaAllocations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
